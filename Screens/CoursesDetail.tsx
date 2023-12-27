@@ -7,27 +7,26 @@ import { RootStackParamList } from '../src/App'
 import BottomBar from '../Components/BottomBar'
 // import props
 type NavigationProps = NativeStackScreenProps<RootStackParamList>
-const NewArival = ({navigation}:NavigationProps) => {
+
+import { DATA } from './Courses'
+// import { useRoute } from '@react-navigation/native'
+
+const CoursesDetail = ({navigation,route}:NavigationProps) => {
+  const id = route.params
+  console.log(id);
+  console.log(DATA[0].types);
+  
   return (
-    <View style={styles.container}>
-      {/* <TopBar
-        leftIcon={require('../assets/Images/backbtn.png')}
-        title='New Arival'
-        leftIconPressed={()=>{
-          navigation.pop()
-        }}
-        rightIcon={require('../assets/Images/home.png')}
-      /> */}
-      <Text>NewArival</Text>
-      {/* <BottomBar navigation={navigation} route={route}/> */}
+    <View>
+      <Text> Course Detaial Screen {} </Text>
     </View>
   )
 }
 
-export default NewArival
+export default CoursesDetail
 
 const styles = StyleSheet.create({
   container: {
     flex: 1
-},
+  },
 })

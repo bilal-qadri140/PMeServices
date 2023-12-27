@@ -7,6 +7,16 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../src/App'
 import BottomBar from '../Components/BottomBar'
 import { NavigationRouteContext } from '@react-navigation/native'
+
+
+// responsive dimensions 
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
+
+
 // import props
 type NavigationProps = NativeStackScreenProps<RootStackParamList>
 
@@ -36,10 +46,10 @@ const styles = StyleSheet.create({
         flex: 1,
         // backgroundColor:'#000'
     },
-    mainHeading:{
-        alignSelf:'center',
-        marginTop:35,
-        fontSize: 35,
+    mainHeading: {
+        alignSelf: 'center',
+        marginTop: responsiveHeight(4),
+        fontSize: responsiveFontSize(5),
         fontWeight: '900',
         color: '#54408C',
     },
@@ -49,14 +59,14 @@ const styles = StyleSheet.create({
         // backgroundColor:'red',
         borderColor: '#fff',
         resizeMode: 'contain',
-        width: '80%',
+        width: responsiveWidth(75),
         alignSelf: 'center',
-        marginTop: 35,
-        marginBottom: 50,
+        marginTop: responsiveHeight(3),
+        marginBottom: responsiveHeight(4),
     },
     img: {
         width: 'auto',
-        height: 210,
+        height: responsiveHeight(26),
         resizeMode: 'center',
         borderColor: '#54408C',
         borderWidth: 3,
@@ -64,17 +74,17 @@ const styles = StyleSheet.create({
 
     },
     headingText: {
-        fontSize: 28,
+        fontSize: responsiveFontSize(4),
         fontWeight: '900',
         color: '#54408C',
         marginLeft: 40,
     },
-    desText:{
-        marginTop:40,
-        marginLeft:40,
-        fontSize:18,
-        marginRight:30,
-        fontWeight:'bold'
+    desText: {
+        marginTop: responsiveHeight(3),
+        marginLeft: 40,
+        fontSize: responsiveFontSize(3),
+        marginRight: 30,
+        fontWeight: 'bold'
 
     }
 })

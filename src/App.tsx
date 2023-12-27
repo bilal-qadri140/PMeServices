@@ -11,31 +11,33 @@ import Icon2 from 'react-native-vector-icons/FontAwesome6'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
 
+// stack navigation
+const Stack = createNativeStackNavigator()
+
 // Screen for navigation
 import Home from '../Screens/Home';
-import NewArival from '../Screens/NewArival';
-import PaidCourses from '../Screens/PaidCourses';
-import PaidServices from '../Screens/PaidServices';
+import CoursesDetail from '../Screens/CoursesDetail'
 import FreeEarning from '../Screens/FreeEarning';
 import OurServices from '../Screens/OurServices';
 import OurProducts from '../Screens/OurProducts';
+import Courses from '../Screens/Courses'
 
 export type RootStackParamList = {
   Home: undefined,
-  NewArival: undefined,
-  PaidCourses: undefined,
-  PaidServices: undefined,
+  CoursesDetail: {id:number},
   FreeEarning: undefined,
   OurServices: undefined,
   OurProducts: undefined,
+  Courses: undefined,
 }
+
 
 const App = () => {
   return (
     <NavigationContainer >
       <Tab.Navigator initialRouteName='Home' screenOptions={{
         headerStyle: {
-          height: 60,
+          height: 55,
           backgroundColor: '#54408C',
         },
         headerTitleStyle: {
@@ -43,54 +45,66 @@ const App = () => {
           fontSize: 26,
         },
         tabBarStyle: {
-          height: 60,
+          height: 55,
           backgroundColor: '#fff',
         },
-        tabBarLabelStyle:{
-          fontWeight:'800',
-          fontSize:14
+        tabBarLabelStyle: {
+          fontWeight: '800',
+          fontSize: 14
         },
-        headerTitleAlign:'center',
-        tabBarActiveBackgroundColor:'#fff',
-        tabBarInactiveBackgroundColor:'#54408C',
-        tabBarInactiveTintColor:'#fff',
-        tabBarActiveTintColor:'#54408C'
+        headerTitleAlign: 'center',
+        tabBarActiveBackgroundColor: '#fff',
+        tabBarInactiveBackgroundColor: '#54408C',
+        tabBarInactiveTintColor: '#fff',
+        tabBarActiveTintColor: '#54408C'
       }}>
         <Tab.Screen name='Home' component={Home} options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name='home' size={size} color={color} />
           ),
-          tabBarLabel:'Home',
-          headerShown:false
+          tabBarLabel: 'Home',
+          headerShown: false
         }} />
-        <Tab.Screen name='PaidCourses' component={PaidCourses} options={{
+        <Tab.Screen name='Courses' options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name='code' size={size} color={color} />
           ),
-          tabBarLabel:'Courses',
-          headerTitle:'Courses'
-        }}/>
+          tabBarLabel: 'Courses',
+          headerTitle: 'Courses',
+          headerShown: false
+        }}>
+          {() => ( // Nesting in navigation
+            <Stack.Navigator screenOptions={{
+              headerShown:false
+            }}>
+              <Stack.Screen name='OurServices' component={Courses} options={{
+                
+              }}/>
+              <Stack.Screen name='CoursesDetail' component={CoursesDetail} />
+            </Stack.Navigator>
+          )}
+        </Tab.Screen>
         <Tab.Screen name='FreeEarning' component={FreeEarning} options={{
           tabBarIcon: ({ color, size }) => (
             <Icon2 name='sack-dollar' size={size} color={color} />
           ),
-          tabBarLabel:'Earning',
-          headerTitle:'Free Earning'
-        }}/>
+          tabBarLabel: 'Earning',
+          headerTitle: 'Free Earning'
+        }} />
         <Tab.Screen name='OurServices' component={OurServices} options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name='briefcase' size={size} color={color} />
           ),
-          tabBarLabel:'Services',
-          headerTitle:'Our Servises'
-        }}/>
+          tabBarLabel: 'Services',
+          headerTitle: 'Our Servises'
+        }} />
         <Tab.Screen name='OurProducts' component={OurProducts} options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name='tag' size={size} color={color} />
           ),
-          tabBarLabel:'Products',
-          headerTitle:'Our Products'
-        }}/>
+          tabBarLabel: 'Products',
+          headerTitle: 'Our Products'
+        }} />
       </Tab.Navigator>
     </NavigationContainer>
   )
